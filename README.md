@@ -1,1 +1,1 @@
-This repo will contain interesting projects and cool things I've done.
+This repo will contain interesting projects and things I think are cool.
