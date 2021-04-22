@@ -22,9 +22,8 @@ def compare(event=None):
 
 # Helper function to update the list with new passed titles
 def _list_update(hashTitle):
-    listMain[3] = listMain[2]
-    listMain[2] = listMain[1]
-    listMain[1] = listMain[0]
+    for i in range(3, -1, -1):
+        listMain[i] = listMain[i - 1]
     listMain[0] = hashTitle + " passed"
 
 # Helper function to display the new list and clear entry fields
