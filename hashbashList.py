@@ -36,12 +36,7 @@ def _list_display():
     ent_second.delete(0, "end")
     ent_title.delete(0, "end")
 
-listMain = [
-    "",
-    "",
-    "",
-    "",
-]
+listMain = ["", "", "", ""]
 
 #creating and labeling the window, also making it fixed size
 window = tk.Tk()
