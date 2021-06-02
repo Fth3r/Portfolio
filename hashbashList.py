@@ -18,7 +18,14 @@ def compare(event=None):
         _list_update(hashTitle)
         _list_display()
     else:
-        lbl_result["text"] = str("Something looks off...")
+        n = 0
+        temp_list = []
+        for i, j in zip(firstHash, secondHash):
+            if i != j:
+                temp = f"{i}:{j}"
+                temp_list.append(temp)
+                n += 1
+        lbl_result["text"] = str(f"These didn't match; {temp_list}\nThere were {n} mismatches")
 
 # Helper function to update the list with new passed titles
 def _list_update(hashTitle):
