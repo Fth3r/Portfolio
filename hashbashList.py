@@ -9,14 +9,18 @@ def compare(event=None):
     firstHash = str(ent_first.get())
     secondHash = str(ent_second.get())
     hashTitle = str(ent_title.get())
+
     if not firstHash:
         lbl_result["text"] = str("please enter something in First Hash")
+
     elif not secondHash:
         lbl_result["text"] = str("Please enter something in Second Hash")
+
     elif firstHash == secondHash:
         lbl_result["text"] = str("Looks like a match!")
         _list_update(hashTitle)
         _list_display()
+        
     else: # This loops through each entry and shows where they differ
         n = 0
         temp_list = []
