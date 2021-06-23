@@ -1,0 +1,12 @@
+A list of cipher methods to consider including in the decoder
+
+X Caesar (ROT)
+X Base64
+X Atbash (pycipher)
+X Affine (pycipher)
+- Polybius Square
+- Columnar Transposition
+/ Vignere (pycipher)
+- Playfair
+- Bifid
+- Binary
