@@ -5,10 +5,16 @@ def encipher(message):
 
     en = Vigenere(key).encipher(message)
 
-    print(en)
     return en
 
-def decipher(message):
+def decipher_with_key(message):
+    key = input("Please enter the keyword used to encipher: ")
 
+    de = Vigenere(key).decipher(message)
 
-encipher('This is my super secret message that I dont want anyone to see')
+    return de
+
+#def decipher_without_key(message):
+
+enciphered = encipher('A secret message')
+print(decipher_with_key(enciphered))
