@@ -22,13 +22,17 @@ def compare(event=None):
         _list_display()
         
     else: # This loops through each entry and shows where they differ
-        n = 0
-        temp_list = []
-        for i, j in zip(firstHash, secondHash):
-            if i != j:
-                temp_list.append(f"{i}:{j}")
-                n += 1
-        lbl_result["text"] = str(f"These didn't match; {temp_list}\nThere were {n} mismatches")
+        _find_mismatches(firstHash, secondHash)
+
+# Helper function to find and display any mismatched characters
+def _find_mismatches(firstHash, secondHash):
+    n = 0
+    temp_list = []
+    for i, j in zip(firstHash, secondHash):
+        if i != j:
+            temp_list.append(f"{i}:{j}")
+            n += 1
+    lbl_result["text"] = str(f"These didn't match; {temp_list}\nThere were {n} mismatches")
 
 # Helper function to update the list with new passed titles
 def _list_update(hashTitle):
