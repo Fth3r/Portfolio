@@ -24,6 +24,10 @@ def find_atb(message):
 find_atb('This is a message')"""
 # index isn't finding the substring, returning -1 for every index
 
+# I'm still working on getting my hand-coded decoder to work
+# This is a simple implementation because atbash uses the same
+# process to encode and decode with no key, so the same func 
+# is used for both. 
 def find_atb(message):
     de = atbash.Atbash().decipher(message, keep_punct=True)
 
