@@ -16,6 +16,9 @@ def compare(event=None):
     elif not secondHash:
         lbl_result["text"] = str("Please enter something in Second Hash")
 
+    elif len(firstHash) != len(secondHash):
+        lbl_result["text"] = str("These values area not the same length.")
+
     elif firstHash == secondHash:
         lbl_result["text"] = str("Looks like a match!")
         _list_update(hashTitle)
