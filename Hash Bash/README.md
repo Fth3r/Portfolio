@@ -16,4 +16,5 @@ Possible features to add:
         # Even though HashBash only displays the title of the passed comparisons, adding the ability to save the
         # values associated with those titles in a dictionary would be easy.
     - Create a "HELP" button.
-        # This would open a popup dialog window explaining the features of the program to save space in the window. 
+        # This would open a popup dialog window explaining the features of the program to save space in the window.
+    - Consider refactoring the code into multiple files for conciseness and readability.  
