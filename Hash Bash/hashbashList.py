@@ -116,6 +116,7 @@ dictSecret = {}
 window = tk.Tk()
 window.title("Hash Bash")
 window.resizable(width=False, height=False)
+window.iconphoto(True, tk.PhotoImage(file="Hash Bash\\Cloud.png"))
 
 #creating and labeling the first entry field
 frm_first = tk.Frame(master=window)
@@ -162,6 +163,7 @@ lbl_list_3.grid(row=4, column=0)
 btn_compare = tk.Button(
     master=window,
     text="Click or Press Return to Compare",
+    width=37,
     command=compare
 )
 window.bind('<Return>', compare)
@@ -171,6 +173,7 @@ lbl_result = tk.Label(master=window, text="No Result Yet")
 btn_help = tk.Button(
     master=window,
     text="Help",
+    width=37,
     command=help_me
 )
 
@@ -178,6 +181,7 @@ btn_help = tk.Button(
 btn_enter = tk.Button(
     master=window, 
     text='Enter Values From a File',
+    width=37,
     command=enter_from_file
 )
 
@@ -185,6 +189,7 @@ btn_enter = tk.Button(
 btn_save = tk.Button(
     master=window,
     text="Export Passed Comparisons",
+    width=37,
     command=save_to_file
 )
 
