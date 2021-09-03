@@ -7,6 +7,11 @@ from tkinter.filedialog import askopenfile as aof
 from tkinter.filedialog import asksaveasfile as asf
 import json
 
+# Modules
+from file_enter import enter_from_file
+from save import save_to_file
+from help_me import help_me
+
 ## This section contains the main logic for the program ##
 
 #function to define the comparison action on enter and button press
@@ -59,53 +64,6 @@ def _list_display():
     ent_first.delete(0, "end")
     ent_second.delete(0, "end")
     ent_title.delete(0, "end")
-
-## This section contains the new utilities to make the program more user-friendly ##
-
-# Open file explorer to open a file of the specified type
-def enter_from_file():
-    f = aof(mode='r',
-            filetypes=[('CSV', '*.csv'), 
-            ('JSON', '*.json'),
-            ('Text', "*.txt"),
-            ('All File Types', '*.*')])
-    if f is not None:
-        content = f.readlines()
-        ent_first.insert(index=1, string=content[0].strip())
-        ent_second.insert(index=1, string=content[1])
-
-# Open save dialog and export the contents of dictSecret to save dir
-def save_to_file():
-    filetypes = [("JSON", "*.json")]
-    saved = asf(filetypes=filetypes,
-                defaultextension=filetypes)
-    
-    saved.write(_prepare_json())
-
-# format the contents of dictSecret as JSON pretty-printed data
-def _prepare_json():
-    return json.dumps(dictSecret,
-                    indent=4,
-                    separators=(", ", ": "),
-                    sort_keys=True)
-
-# Create a popup window to display info on button press
-def help_me():
-    t = tk.Toplevel(window)
-    t.geometry("500x200")
-
-    lbl_help = tk.Label(master=t, text=
-    "This program is useful for comparing two values.\n"
-    "Some preliminary comparisons are made on the two entries before\n"
-    "they are iterated to verify that they exist and are the same length.\n\n"
-    "To enter values from a file, separate the two values on separate lines\n"
-    "with only two values in the file. The 'enter from a file' button will input them.\n\n"
-    "All passed comparisons will be saved behind the scenes regardless of falling\n"
-    "off the display list. Click the export button and pick a location/filename\n"
-    "to save the passed values in a .json file. As yet no other filetypes are available.\n\n"
-    "There will be more features coming, and help_me will be updated accordingly."
-    )
-    lbl_help.pack()
 
 ## This section begins the GUI creation and layout ##
 
@@ -174,7 +132,7 @@ btn_help = tk.Button(
     master=window,
     text="Help",
     width=37,
-    command=help_me
+    command=lambda: help_me(window)
 )
 
 # Create a button to call the enter_from_file() function
@@ -182,7 +140,7 @@ btn_enter = tk.Button(
     master=window, 
     text='Enter Values From a File',
     width=37,
-    command=enter_from_file
+    command=lambda: enter_from_file(ent_first, ent_second)
 )
 
 # Create a button to call the save_to_file() function
@@ -190,7 +148,7 @@ btn_save = tk.Button(
     master=window,
     text="Export Passed Comparisons",
     width=37,
-    command=save_to_file
+    command=lambda: save_to_file(dictSecret)
 )
 
 #lay the frames out using .grid()
