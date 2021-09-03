@@ -1,7 +1,12 @@
+# A module to handle the help window popup
+
 import tkinter as tk
 
 def help_me(window):
-    t = tk.Toplevel(window)
+    """This module generates a popup window on top of the Tkinter master
+        window in order to display information about the various features."""
+
+    t = tk.Toplevel(window) # tk.Toplevel creates a popup window
     t.geometry("500x200")
 
     lbl_help = tk.Label(master=t, text=

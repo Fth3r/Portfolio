@@ -3,6 +3,10 @@
 from tkinter.filedialog import askopenfile as aof
 
 def enter_from_file(ent_first, ent_second):
+    """This module takes the 2 Tkinter entry variables as input, generates a popup
+        file explorer dialog to choose a file to use in data entry, and 
+        inserts the first two lines of the chosen file into the entry fields."""
+
     f = aof(mode='r',
             filetypes=[('CSV', '*.csv'), 
             ('JSON', '*.json'),
