@@ -6,6 +6,8 @@ the opportunity to present a more feature-rich user experience at the cost of re
 
 If the compared values don't match, HashBash will display to the user the mismatches indices and their values.
 
+Dependencies are Tkinter, json, and the modules in this folder.
+
 Possible features to add:
     (DONE) Using len() to compare length before comparing indices.
         # This will stop HashBash from returning all indices after an added or subtracted character as mismatched.
@@ -17,4 +19,4 @@ Possible features to add:
         # values associated with those titles in a dictionary would be easy.
     (DONE) Create a "HELP" button.
         # This would open a popup dialog window explaining the features of the program to save space in the window.
-    - Consider refactoring the code into multiple files for conciseness and readability.  
+    (DONE) Consider refactoring the code into multiple files for conciseness and readability.  

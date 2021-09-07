@@ -34,6 +34,7 @@ def compare(event=None):
         _list_update(hashTitle)
         _list_display()
 
+        # Add the passed title and its values to the storage dictionary for saving
         dictSecret[hashTitle] = [firstHash, secondHash, "passed"]
         
     else: # This loops through each entry and shows where they differ
