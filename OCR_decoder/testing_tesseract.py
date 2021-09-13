@@ -18,7 +18,10 @@ directory = ''
 
 try:
    # Attempt to open file found at passed string or 'directory' var
-   img = cv2.imread('/home/fth3r/coding/OCR_decoder/new_image.png')
+   # Uncomment for Windows
+   #img = cv2.imread('C:\\Users\\Jake\\Documents\\Repos\\Portfolio\\OCR_decoder\\dependencies\\new_image.png')
+   # Uncomment for Linux
+   img = cv2.imread('/mnt/c/Users/Jake/Documents/Repos/Portfolio/OCR_decoder/dependencies/new_image.png')
 except FileNotFoundError:
    # If the file is not found, print a clean message instead of error
    print("Couldn't find that file.")

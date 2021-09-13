@@ -7,8 +7,13 @@
 UPPERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 Characters = UPPERS + UPPERS.lower() + ' \t\n'
 
+# Uncomment from Windows
+#dirpath = 'C:\\Users\\Jake\\Documents\\Repos\\Portfolio\\OCR_decoder\\dependencies\\dictionary.txt'
+# Uncomment for Linux
+dirpath = '/mnt/c/Users/Jake/Documents/Repos/Portfolio/OCR_decoder/denpendencies/dictionary.txt'
+
 def _read_dictionary():
-    dictFile = open('dictionary.txt')
+    dictFile = open(dirpath)
     words = {}
 
     for word in dictFile.read().split('\n'):
