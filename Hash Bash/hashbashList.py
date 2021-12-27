@@ -3,9 +3,6 @@
 #GUI script to compare two values, usually sha256 or md5 hashes
 
 import tkinter as tk
-from tkinter.filedialog import askopenfile as aof
-from tkinter.filedialog import asksaveasfile as asf
-import json
 
 # Modules
 from file_enter import enter_from_file
