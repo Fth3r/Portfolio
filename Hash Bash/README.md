@@ -19,4 +19,7 @@ Possible features to add:
         # values associated with those titles in a dictionary would be easy.
     (DONE) Create a "HELP" button.
         # This would open a popup dialog window explaining the features of the program to save space in the window.
-    (DONE) Consider refactoring the code into multiple files for conciseness and readability.  
+    (DONE) Consider refactoring the code into multiple files for conciseness and readability. 
+    Taking teo files as input instead of two strings, running a hash on them, and comparing that to verify that they are the same.
+        # Would his even be worth doing? what use case puts two copies of the same file in need of hash comparison?
+        # Wouldn't a diff be just as easy and tell the user more?
