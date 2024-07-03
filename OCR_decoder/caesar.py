@@ -61,7 +61,6 @@ def decode_cz(message):
             results.append(attempt)
         else:
             pass
-    print(results)
     return results
 
 """

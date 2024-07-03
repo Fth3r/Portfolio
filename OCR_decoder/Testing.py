@@ -5,7 +5,7 @@ import sys
 
 # Defining a directory in which to save the image and what to name the image
 # Also assigning the webcam capture variable
-directory = r'C:\Users\jbeck\Documents\coding\images'
+directory = r'D:Coding\\repos\\Portfolio\\OCR_decoder\\images'
 filename = 'new_image.jpg'
 vid = cv.VideoCapture(0)
 

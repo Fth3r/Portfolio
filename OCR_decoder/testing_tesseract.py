@@ -8,20 +8,14 @@ from detectEnglish import isEnglish
 
 # pytesseract is used here to get a string from text in an image
 from pytesseract import pytesseract as pt
-
-# Uncomment for Windows and include path
-#pt.tesseract_cmd = r'C:/PATH/TO/TESSERACT'
+# Need to tell pytesseract where the compiled tesseract binary is located
+pt.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
 # Assign dir of image to be read and pass to cv2.imread below
 directory = ''
 
-
 try:
-   # Attempt to open file found at passed string or 'directory' var
-   # Uncomment for Windows
-   #img = cv2.imread('C:\\Users\\Jake\\Documents\\Repos\\Portfolio\\OCR_decoder\\dependencies\\new_image.png')
-   # Uncomment for Linux
-   img = cv2.imread('/mnt/c/Users/Jake/Documents/Repos/Portfolio/OCR_decoder/dependencies/new_image.png')
+   img = cv2.imread('D:\Coding\Repos\Portfolio\OCR_decoder\dependencies\\new_image.png')
 except FileNotFoundError:
    # If the file is not found, print a clean message instead of error
    print("Couldn't find that file.")
@@ -37,8 +31,8 @@ img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) [1]
 
 # Create a window to show the image being read before proceeding
 # Also wait for keypress to close
-#cv2.imshow("Photo", img)
-#k = cv2.waitKey(0)
+cv2.imshow("Photo", img)
+k = cv2.waitKey(0)
 
 # Leverage pytesseract and assign what it returns to the 'text' var, then print
 text = pt.image_to_string(img, lang='eng')
