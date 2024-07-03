@@ -72,7 +72,7 @@ dictSecret = {}
 window = tk.Tk()
 window.title("Hash Bash")
 window.resizable(width=False, height=False)
-window.iconphoto(True, tk.PhotoImage(file="Hash Bash\\Cloud.png"))
+# window.iconphoto(True, tk.PhotoImage(file=".\\Cloud.png"))
 
 #creating and labeling the first entry field
 frm_first = tk.Frame(master=window)
