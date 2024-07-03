@@ -2,9 +2,9 @@
 import cv2
 import numpy as np
 
-from b64 import decode_b64
-from atbash import find_atb
-from detectEnglish import isEnglish
+from decoders.b64 import decode_b64
+from decoders.atbash import find_atb
+from decoders.detectEnglish import isEnglish
 
 # pytesseract is used here to get a string from text in an image
 from pytesseract import pytesseract as pt
