@@ -61,10 +61,12 @@ def decode_cz(message):
             results.append(attempt)
         else:
             pass
-    return results
 
-"""
-The comparison to English could be refactored into a helper func,
-also consider building in a conditional second round of comparison
-through isEnglish in case more than one result slips through.
-"""
+    # If there are more than 1 solutions returned, run each through
+    # another round of isEnglish with higher requirements
+    while len(results) > 1:
+        for solution in results:
+            if not isEnglish(solution, wordPercent=75):
+                results.remove(solution)
+
+    return results[0]
