@@ -6,8 +6,8 @@ from PIL import ImageTk, Image
 from decoders.atbash import find_atb
 
 main = tk.Tk()
-main.title("Project Ovaltine")
-main.geometry("2000x750") # maybe we can set this value based on the image size
+main.title("Project Ovaltine") # can't for the life of me remember why I called it this
+main.geometry("750x500") # maybe we can set this value based on the image size
 main.resizable(width=True, height=True)
 main.iconphoto(True, tk.PhotoImage(file="dependencies\\cup.png",
                                     width=700,
@@ -23,30 +23,20 @@ methods = [
     "Vigenere",
 ]
 
+### This section is for the image display ###
+path = "D:\Coding\\repos\\portfolio\OCR_decoder\dependencies\\new_message.jpg"
+
+canvas = tk.Canvas(main, width=1500, height=300)
+canvas.pack()
+
+img = ImageTk.PhotoImage(Image.open(path))
+canvas.create_image(200, 200, image=img)
+
 display = tk.StringVar()
 display.set(methods[0])
 
 drop = tk.OptionMenu(main, display, *methods)
 drop.pack()
-
-def test():
-    if display.get():
-        label.config(text=display.get())
-
-button = tk.Button(main, text="test", command=test)
-button.pack()
-
-label = tk.Label(main, text="Not yet")
-label.pack()
-
-### This section is for the image display ###
-path = "D:\Coding\\repos\\portfolio\OCR_decoder\dependencies\\new_image.png"
-
-canvas = tk.Canvas(main, width=2000, height=400)
-canvas.pack()
-
-img = ImageTk.PhotoImage(Image.open(path))
-canvas.create_image(200, 200, image=img)
 
 ### This section is for the decoding conditional logic ###
 label2 = tk.Label(main, text="Enter Ciphertext")
@@ -62,7 +52,6 @@ def decode():
     else:
         decoded = f"{display.get()} not yet implemented"
     label3.config(text=decoded)
-    
 
 label3 = tk.Label(main, text="No value yet")
 button2 = tk.Button(main, text="Decode", command=decode)

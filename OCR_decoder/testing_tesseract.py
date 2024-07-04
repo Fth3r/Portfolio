@@ -15,7 +15,7 @@ pt.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
 directory = ''
 
 try:
-   img = cv2.imread('D:\Coding\Repos\Portfolio\OCR_decoder\dependencies\\new_image.png')
+   img = cv2.imread('D:\Coding\Repos\Portfolio\OCR_decoder\dependencies\\new_message.jpg')
 except FileNotFoundError:
    # If the file is not found, print a clean message instead of error
    print("Couldn't find that file.")
@@ -35,8 +35,8 @@ cv2.imshow("Photo", img)
 k = cv2.waitKey(0)
 
 # Leverage pytesseract and assign what it returns to the 'text' var, then print
-text = pt.image_to_string(img, lang='eng')
-text = text.replace(" ", "")
+text = pt.image_to_string(img)
+#text = text.replace(" ", "")
 text = text.strip()
 
 

@@ -2,7 +2,7 @@
 
 # a module to encode or decode the caesar cipher
 
-from detectEnglish import isEnglish
+from decoders.detectEnglish import isEnglish
 
 uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 symbols = uppers + uppers.lower() + '1234567890 !?.'

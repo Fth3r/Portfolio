@@ -42,5 +42,5 @@ vid.release()
 cv.destroyAllWindows()
 
 # Later, after the program uses the image, it should be deleted.
-os.chdir(directory)
-os.remove(filename)
+# os.chdir(directory)
+# os.remove(filename)

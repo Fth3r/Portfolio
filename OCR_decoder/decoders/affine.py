@@ -1,7 +1,7 @@
 # A module to encode or decode the Affine Cipher, decoding doesn't require knowledge of the key beforehand. 
 
 from pycipher import affine
-from detectEnglish import isEnglish
+from decoders.detectEnglish import isEnglish
 
 def encode_aff(message):
 
@@ -32,10 +32,10 @@ def decode_aff(message):
 
     # If there are more than 1 solutions returned, run each through
     # another round of isEnglish with higher requirements
-    if len(possible_solutions) > 1:
+    while len(possible_solutions) > 1:
         for solution in possible_solutions:
             if not isEnglish(solution, wordPercent=75):
                 possible_solutions.remove(solution)
 
-    return possible_solutions
+    return possible_solutions[0]
 
