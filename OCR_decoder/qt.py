@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.label)
         layout.addWidget(self.dropdown)
         layout.addWidget(self.button)
+        
         # pack widgets into a container
         container = QWidget()
         container.setLayout(layout)
