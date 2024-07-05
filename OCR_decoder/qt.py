@@ -1,5 +1,6 @@
 import sys
 import cv2
+import platform
 import numpy as np
 
 from decoders.affine import decode_aff
@@ -101,8 +102,12 @@ class MainWindow(QMainWindow):
         with the text Tesseract generated. 
         """
 
-        # Need to tell pytesseract where the compiled tesseract binary is located
-        pt.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
+        if platform.system() == "Windows":
+            # Need to tell pytesseract where the compiled tesseract binary is located
+            pt.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
+        # This may not work, needs more testing
+        elif platform.system() == "Linux":
+            pt.tesseract_cmd = "/home/fth3r/Downloads/tesseract-5.4.1-x86_64.AppImage"
 
         img = cv2.imread(self.inFile[0]) # getOpenFileName returns a tuple of the path and the file filter, get just the path
 
@@ -126,7 +131,6 @@ class MainWindow(QMainWindow):
 
             # Leverage pytesseract and assign what it returns to the 'text' var, then print
             text = pt.image_to_string(img)
-            #text = text.replace(" ", "")
             text = text.strip()
 
             self.label.setText(text)
