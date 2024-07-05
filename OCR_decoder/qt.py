@@ -6,12 +6,13 @@ from decoders.affine import decode_aff
 from decoders.atbash import find_atb
 from decoders.b64 import decode_b64
 from decoders.caesar import decode_cz
+from decoders.binary import decode_bin
 
 from pytesseract import pytesseract as pt
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import(
     QApplication, QMainWindow, QPushButton, QLabel,
-    QLineEdit, QVBoxLayout, QWidget, QComboBox
+    QVBoxLayout, QWidget, QComboBox, QFileDialog, QMessageBox
 )
 
 class MainWindow(QMainWindow):
@@ -24,13 +25,12 @@ class MainWindow(QMainWindow):
         self.options = decoding_options
 
         # create the label whose text will change
-        self.label = QLabel("Input directory and press return")
+        self.label = QLabel("Select an image for Tesseract to process")
         self.label.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
 
-        # connecting the signal of the lineedit changing to the label's text
-        self.input = QLineEdit("replace with path to image file")
-        # self.input.textChanged.connect(self.label.setText)
-        self.input.returnPressed.connect(self.getTessOutput)
+        # create the open file button that calls the getOpenFileName widget
+        self.fileButton = QPushButton("Select an image file")
+        self.fileButton.clicked.connect(self.openFile)
         
         # create the dropdown menu for decoder options
         self.dropdown = QComboBox()
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
 
         # adding the above widgets into the layout
         layout = QVBoxLayout()
-        layout.addWidget(self.input)
+        layout.addWidget(self.fileButton)
         layout.addWidget(self.label)
         layout.addWidget(self.dropdown)
         layout.addWidget(self.button)
@@ -56,28 +56,46 @@ class MainWindow(QMainWindow):
         # the container holds all the widgets and can itself be the central widget
         self.setCentralWidget(container)
 
+    def openFile(self):
+        """
+        This function handles the file open process and calls Tesseract to process the selected file.
+        It was done this way in order to keep the function parameters and have it connected to a button press.
+        """
+
+        self.inFile = QFileDialog.getOpenFileName(self, caption="Open Image", filter="JPG files (*.jpg);; PNG files (*.png)")
+        self.getTessOutput()
+
     def decode(self):
         """
         This function handles the decoding operation based on the selection made in self.dropdown.
         """
 
         try:
-            if self.dropdown.currentIndex() == 0:
-                self.label.setText(decode_aff(self.label.text()))
-            elif self.dropdown.currentIndex() == 1:
-                self.label.setText(find_atb(self.label.text()))
-            elif self.dropdown.currentIndex() == 2:
-                self.label.setText(decode_b64(self.label.text()))
-            elif self.dropdown.currentIndex() == 3:
-                self.label.setText(decode_cz(self.label.text()))
-        
+            match self.dropdown.currentIndex():
+                case 0:
+                    self.label.setText(decode_aff(self.label.text()))
+                case 1:
+                    self.label.setText(find_atb(self.label.text()))
+                case 2:
+                    self.label.setText(decode_b64(self.label.text()))
+                case 3:
+                    self.label.setText(decode_bin(self.label.text()))
+                case 4:
+                    self.label.setText(decode_cz(self.label.text()))
+
         except:
-            self.label.setText(f"The input must not be encoded with {self.options[self.dropdown.currentIndex()]}")
+            # if a message is attempted to be decoded with the wrong cipher it will throw an error
+            # here we handle those errors gracefully with a warning message rather than crashing the app
+            QMessageBox.warning(self,
+                                "Incorrect Encoding",
+                                f"This message must not have been encoded with {self.options[self.dropdown.currentIndex()]}",
+                                buttons=QMessageBox.StandardButton.Ok
+            )
 
     def getTessOutput(self):
         """
         This function implements the PyTesseract framework to generate text from an input image
-        file. It reads the filepath from the input box and uses cv2 to open and preprocess the
+        file. It reads the filepath from file navigation window and uses cv2 to open and preprocess the
         image. It then renders the preprocessed image in a new window for preview before it is passed
         to Tesseract for final processing. Once this is done, the GUI label text is updated
         with the text Tesseract generated. 
@@ -86,7 +104,7 @@ class MainWindow(QMainWindow):
         # Need to tell pytesseract where the compiled tesseract binary is located
         pt.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
-        img = cv2.imread(self.input.text())
+        img = cv2.imread(self.inFile[0]) # getOpenFileName returns a tuple of the path and the file filter, get just the path
 
         # Trying to apply some preprocessing to the image
         try:
@@ -118,7 +136,7 @@ class MainWindow(QMainWindow):
         
 app = QApplication(sys.argv)
 
-window = MainWindow(decoding_options = ['Affine', 'Atbash', 'Base64', 'Caesar'])
+window = MainWindow(decoding_options = ['Affine', 'Atbash', 'Base64', 'Binary', 'Caesar'])
 window.show()
 
 app.exec()
