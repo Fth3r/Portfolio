@@ -18,12 +18,12 @@ from PyQt6.QtWidgets import(
 
 class MainWindow(QMainWindow):
 
-    def __init__(self, decoding_options):
+    def __init__(self):
         super().__init__()
 
         self.setWindowTitle("OCR Decoder")
 
-        self.options = decoding_options
+        self.options = ['Affine', 'Atbash', 'Base64', 'Binary', 'Caesar']
 
         # create the label whose text will change
         self.label = QLabel("Select an image for Tesseract to process")
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
                     self.label.setText(decode_cz(self.label.text()))
 
         except:
-            # if a message is attempted to be decoded with the wrong cipher it will throw an error
+            # if a message is attempted to be decoded with the wrong cipher it may throw an error
             # here we handle those errors gracefully with a warning message rather than crashing the app
             QMessageBox.warning(self,
                                 "Incorrect Encoding",
@@ -103,8 +103,8 @@ class MainWindow(QMainWindow):
         """
 
         if platform.system() == "Windows":
-            # Need to tell pytesseract where the compiled tesseract binary is located
-            pt.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
+            # I have added C:\Program Files\Tesseract-OCR to my PATH, so just the executable works here
+            pt.tesseract_cmd = 'tesseract.exe'
         # This may not work, needs more testing
         elif platform.system() == "Linux":
             pt.tesseract_cmd = "/home/fth3r/Downloads/tesseract-5.4.1-x86_64.AppImage"
@@ -140,7 +140,7 @@ class MainWindow(QMainWindow):
         
 app = QApplication(sys.argv)
 
-window = MainWindow(decoding_options = ['Affine', 'Atbash', 'Base64', 'Binary', 'Caesar'])
+window = MainWindow()
 window.show()
 
 app.exec()
